@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
             todoAdapter.addTodo(todo)
             etTodoTitle.text.clear()
 
-            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.apply {
-                putString("STRING_KEY", todoTitle)
-            }.apply()
+//            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//            val editor = sharedPreferences.edit()
+//            editor.apply {
+//                putString("STRING_KEY", todoTitle)
+//            }.apply()
 
 //            Отладка
             Toast.makeText(this, "Data save " + todo, Toast.LENGTH_SHORT).show()
@@ -63,126 +63,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-//    private fun saveData() {
-//        val todoTitle = etTodoTitle.text.toString()
-//        if(todoTitle.isNotEmpty()) {
-//            val todo = Todo(todoTitle)
-//
-//            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//            val editor = sharedPreferences.edit()
-//
-//            editor.apply {
-//                putString("STRING_KEY", todo)
-//            }
-//
-////            todoAdapter.addTodo(todo)
-//            etTodoTitle.text.clear()
-//        }
-//
-//    }
-//
-//    private fun loadData() {
-//
-//        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        val savedString = sharedPreferences.getString("STRING_KEY", null)
-//        val todoTitle = savedString
-//        val todo = Todo(todoTitle.toString())
-//
-//        todoAdapter = TodoAdapter(mutableListOf())
-//
-//        todoAdapter.addTodo(todo)
-//
-//    }
-
-//private fun saveData() {
-//
-//    todoAdapter = TodoAdapter(mutableListOf())
-//    rvTodoItems.adapter = todoAdapter
-//    rvTodoItems.layoutManager = LinearLayoutManager(this)
-//
-//    val todoTitle = etTodoTitle.text.toString()
-//    if(todoTitle.isNotEmpty()) {
-//        val todo = Todo(todoTitle)
-//
-//        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//
-//        editor.apply {
-//            putString("STRING_KEY", todoTitle)
-//        }.apply()
-//
-//        todoAdapter.addTodo(todo)
-//        etTodoTitle.text.clear()
-//
-//        Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show()
-//    }
-//
-//}
-
-//            saveData()
-//
-//
-//override fun onCreate(savedInstanceState: Bundle?) {
-//    super.onCreate(savedInstanceState)
-//    setContentView(R.layout.activity_main)
-//
-//    loadData()
-//
-//    btnAddTodo.setOnClickListener {
-//        saveData()
-//    }
-//
-//    btnDeleteDoneTodos.setOnClickListener {
-//        deleteData()
-//    }
-//}
-//
-//private fun saveData() {
-//
-//    todoAdapter = TodoAdapter(mutableListOf())
-//    rvTodoItems.adapter = todoAdapter
-//    rvTodoItems.layoutManager = LinearLayoutManager(this)
-//
-//    val todoTitle = etTodoTitle.text.toString()
-//    if(todoTitle.isNotEmpty()) {
-//        val todo = Todo(todoTitle)
-//
-//        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//
-//        editor.apply {
-//            putString("STRING_KEY", todoTitle)
-//        }.apply()
-//
-//        todoAdapter.addTodo(todo)
-//        etTodoTitle.text.clear()
-//
-//        Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show()
-//    }
-//
-//}
-//
-//private fun loadData() {
-//
-//    val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//    val savedString = sharedPreferences.getString("STRING_KEY", null)
-//
-//    todoAdapter = TodoAdapter(mutableListOf())
-//    rvTodoItems.adapter = todoAdapter
-//    rvTodoItems.layoutManager = LinearLayoutManager(savedString)
-//
-//}
-//
-//private fun deleteData() {
-//
-//    todoAdapter = TodoAdapter(mutableListOf())
-//    rvTodoItems.adapter = todoAdapter
-//    rvTodoItems.layoutManager = LinearLayoutManager(this)
-//
-//    val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//    val savedString = sharedPreferences.getString("STRING_KEY", null)
-//
-//    todoAdapter.deleteDoneTodo()
-//
-//}
