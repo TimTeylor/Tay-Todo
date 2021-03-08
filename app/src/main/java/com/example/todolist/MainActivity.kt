@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_todo.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,47 +20,33 @@ class MainActivity : AppCompatActivity() {
         rvTodoItems.adapter = todoAdapter
         rvTodoItems.layoutManager = LinearLayoutManager(this)
 
-        loadData()
+        val context = this
+        val db = DataBaseHandler(context)
+
+        val data = db.readData()
+        Toast.makeText(this, "Data read" + data, Toast.LENGTH_SHORT).show()
+        for (i in 0 until data.size) {
+            val todo = Todo(data[i].title, data[i].id)
+            todoAdapter.addTodo(todo)
+        }
 
         btnAddTodo.setOnClickListener {
-            saveTodo()
+            val todoTitle = etTodoTitle.text.toString()
+            if(todoTitle.isNotEmpty()) {
+                val lastId = data.size
+                val todo = Todo(todoTitle, lastId.toString())
+
+                todoAdapter.addTodo(todo)
+                db.insertData(todo)
+                etTodoTitle.text.clear()
+            }
         }
 
-        btnDeleteDoneTodos.setOnClickListener {
-            deleteData()
+        btnDone.setOnClickListener {
+            val todoTitle = etTodoTitle.text.toString()
+            val lastId = data.size
+            val todo = Todo(todoTitle, lastId.toString())
+            todoAdapter.deleteDoneTodo(todo)
         }
     }
-
-    private fun saveTodo() {
-        val todoTitle = etTodoTitle.text.toString()
-        if(todoTitle.isNotEmpty()) {
-            val todo = Todo(todoTitle)
-
-            todoAdapter.addTodo(todo)
-            etTodoTitle.text.clear()
-
-//            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//            val editor = sharedPreferences.edit()
-//            editor.apply {
-//                putString("STRING_KEY", todoTitle)
-//            }.apply()
-
-//            Отладка
-            Toast.makeText(this, "Data save " + todo, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun loadData() {
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedString = sharedPreferences.getString("STRING_KEY", null)
-
-        val todo = Todo(savedString.toString())
-        Toast.makeText(this, "Load data " + todo, Toast.LENGTH_SHORT).show()
-        todoAdapter.addTodo(todo)
-    }
-
-    private fun deleteData() {
-        todoAdapter.deleteDoneTodo()
-    }
-
 }
