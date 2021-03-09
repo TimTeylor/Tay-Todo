@@ -41,7 +41,7 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         if(result.moveToFirst()) {
             do {
                 val todoTitle = result.getString(result.getColumnIndex(COL_ID))
-                val todoId = result.getString(result.getColumnIndex(COL_NAME))
+                val todoId = result.getInt(result.getColumnIndex(COL_NAME))
                 val todo = Todo(todoTitle, todoId)
                 list.add(todo)
             } while (result.moveToNext())

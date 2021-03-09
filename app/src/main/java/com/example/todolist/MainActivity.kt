@@ -15,16 +15,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         todoAdapter = TodoAdapter(mutableListOf())
+
         rvTodoItems.adapter = todoAdapter
         rvTodoItems.layoutManager = LinearLayoutManager(this)
 
         val context = this
         val db = DataBaseHandler(context)
+//        Toast.makeText(null, "Start", Toast.LENGTH_SHORT).show()
 
         val data = db.readData()
-        Toast.makeText(this, "Data read" + data, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "Data read" + data, Toast.LENGTH_SHORT).show()
         for (i in 0 until data.size) {
             val todo = Todo(data[i].title, data[i].id)
             todoAdapter.addTodo(todo)
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             val todoTitle = etTodoTitle.text.toString()
             if(todoTitle.isNotEmpty()) {
                 val lastId = data.size
-                val todo = Todo(todoTitle, lastId.toString())
+                val todo = Todo(todoTitle, lastId)
 
                 todoAdapter.addTodo(todo)
                 db.insertData(todo)
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         btnDone.setOnClickListener {
             val todoTitle = etTodoTitle.text.toString()
             val lastId = data.size
-            val todo = Todo(todoTitle, lastId.toString())
+            val todo = Todo(todoTitle, lastId)
             todoAdapter.deleteDoneTodo(todo)
         }
     }
