@@ -8,7 +8,7 @@ import android.widget.Toast
 
 val DATABASENAME = "TEY TODO DB"
 val TABLENAME = "Todos"
-val COL_NAME = "todo"
+val COL_NAME = "title"
 val COL_ID = "id"
 
 class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASENAME, null, 1) {
