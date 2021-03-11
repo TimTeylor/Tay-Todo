@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp">
+    android:paddingEnd="8dp"
+    tools:context=".DoneActivity">
 
     <TextView
         android:id="@+id/tvTodoTitle"
@@ -14,12 +16,11 @@
         android:text="Example"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnDone"
+        android:id="@+id/btnDoneTodo"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

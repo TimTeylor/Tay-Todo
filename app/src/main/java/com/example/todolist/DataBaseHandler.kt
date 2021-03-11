@@ -21,18 +21,6 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         //onCreate(db)
     }
 
-    fun insertData(todo: Todo) {
-        val database = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(COL_NAME, todo.title)
-        val result = database.insert(TABLENAME, null, contentValues)
-        if(result == (0).toLong()) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     fun readData(): MutableList<Todo> {
         val list: MutableList<Todo> = ArrayList()
         val db = this.readableDatabase
@@ -40,12 +28,29 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         val result = db.rawQuery(query, null)
         if(result.moveToFirst()) {
             do {
-                val todoTitle = result.getString(result.getColumnIndex(COL_ID))
-                val todoId = result.getInt(result.getColumnIndex(COL_NAME))
+                val todoId = result.getInt(result.getColumnIndex(COL_ID))
+                val todoTitle = result.getString(1)
                 val todo = Todo(todoTitle, todoId)
                 list.add(todo)
             } while (result.moveToNext())
         }
         return list
+    }
+
+//    fun delete(String: ID) {
+//        val database = this.writableDatabase
+//        database.delete(TABLENAME, "ID=" + ID, null)
+//    }
+
+    fun insertData(title: String) {
+        val database = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME, title)
+        val result = database.insert(TABLENAME, null, contentValues)
+        if(result == (0).toLong()) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        }
     }
 }
